@@ -362,8 +362,8 @@ class RoadLikeTool extends ToolStroke
 		case RIVER:		// wire on water
 		case REDGE:
 		case CHANNEL:
-
-			cost = WIRE_COST;
+		
+			cost = UNDERWATER_WIRE_COST;
 
 			// check east
 			{
@@ -424,33 +424,46 @@ class RoadLikeTool extends ToolStroke
 					break;
 				}
 			}
+			cost = 0;
 
 			// cannot do wire here
 			return false;
 
 		case TileConstants.ROADS: // wire on E/W road
+			cost = WIRE_COST;
+
 			eff.setTile(0, 0, HROADPOWER);
 			break;
 
 		case ROADS2: // wire on N/S road
+			cost = WIRE_COST;
+
 			eff.setTile(0, 0, VROADPOWER);
 			break;
 
 		case LHRAIL:	// wire on E/W railroad tracks
+			cost = WIRE_COST;
+
 			eff.setTile(0, 0, RAILHPOWERV);
 			break;
 
 		case LVRAIL:	// wire on N/S railroad tracks
+			cost = WIRE_COST;
+
 			eff.setTile(0, 0, RAILVPOWERH);
 			break;
 
 		default:
 			if (tile != DIRT) {
+				cost = WIRE_COST;
+
 				if (city.autoBulldoze && canAutoBulldozeRRW(tile)) {
 					cost += 1; //autodoze cost
 				}
 				else {
 					//cannot do wire here
+					cost = 0;
+
 					return false;
 				}
 			}

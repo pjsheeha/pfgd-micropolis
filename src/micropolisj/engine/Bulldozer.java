@@ -27,8 +27,9 @@ class Bulldozer extends ToolStroke
 			for (int x = 0; x < b.width; x++) {
 
 				ToolEffectIfc subEff = new TranslatedToolEffect(eff, b.x+x, b.y+y);
-				if (city.isTileDozeable(subEff)) {
 
+				if (city.isTileDozeable(subEff)) {
+					
 					dozeField(subEff);
 				}
 
@@ -80,7 +81,6 @@ class Bulldozer extends ToolStroke
 	void dozeField(ToolEffectIfc eff)
 	{
 		int tile = eff.getTile(0, 0);
-
 		if (isOverWater(tile))
 		{
 			// dozing over water, replace with water.
@@ -88,6 +88,7 @@ class Bulldozer extends ToolStroke
 		}
 		else
 		{
+
 			// dozing on land, replace with land. Simple, eh?
 			eff.setTile(0, 0, DIRT);
 		}
